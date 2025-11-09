@@ -51,6 +51,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Windows\DropTableViewer.xaml.cs" />
+    <Compile Include="AppConfig.cs" />
     <Compile Include="Engine\FileManager.cs" />
     <Compile Include="Engine\Data\FileHandler.cs" />
     <Compile Include="Engine\Data\STB.cs" />
@@ -95,6 +96,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="App.config" />
     <None Include="Resources\itemtypes.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

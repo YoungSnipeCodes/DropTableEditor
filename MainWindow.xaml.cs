@@ -13,12 +13,23 @@ namespace DropTableEditor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string ConfigFileName = "DropTableEditor.config";
+        private AppConfig _config;
 
         public MainWindow()
         {
             InitializeComponent();
-            LoadSavedPath();
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        /// <summary>
+        /// Handles the window loaded event.
+        /// </summary>
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Use dispatcher to ensure UI is fully ready before loading
+            this.Dispatcher.BeginInvoke(
+                System.Windows.Threading.DispatcherPriority.ApplicationIdle,
+                new Action(() => LoadSavedPath()));
         }
 
         /// <summary>
@@ -28,19 +39,20 @@ namespace DropTableEditor
         {
             try
             {
-                if (File.Exists(ConfigFileName))
+                _config = AppConfig.Load();
+                
+                if (!string.IsNullOrEmpty(_config.LastDataPath) && Directory.Exists(_config.LastDataPath))
                 {
-                    string savedPath = File.ReadAllText(ConfigFileName).Trim();
-                    if (Directory.Exists(savedPath))
-                    {
-                        DataPathTextBox.Text = savedPath;
-                        ValidatePath(savedPath);
-                    }
+                    DataPathTextBox.Text = _config.LastDataPath;
+                    ValidatePath(_config.LastDataPath);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // Ignore config loading errors
+                // Show config loading errors
+                StatusText.Text = "Error loading saved path: " + ex.Message;
+                StatusText.Foreground = System.Windows.Media.Brushes.Orange;
+                _config = new AppConfig();
             }
         }
 
@@ -49,14 +61,11 @@ namespace DropTableEditor
         /// </summary>
         private void SavePath(string path)
         {
-            try
-            {
-                File.WriteAllText(ConfigFileName, path);
-            }
-            catch
-            {
-                // Ignore config saving errors
-            }
+            if (_config == null)
+                _config = new AppConfig();
+                
+            _config.LastDataPath = path;
+            _config.Save();
         }
 
         /// <summary>
@@ -83,7 +92,22 @@ namespace DropTableEditor
         }
 
         /// <summary>
-        /// Validates that the selected path contains required files.
+        /// Handles the TextBox KeyDown event (Enter key triggers validation).
+        /// </summary>
+        private void DataPathTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                string path = DataPathTextBox.Text.Trim();
+                if (!string.IsNullOrEmpty(path))
+                {
+                    ValidatePath(path);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validates that the selected path contains required files and loads them.
         /// </summary>
         private void ValidatePath(string path)
         {
@@ -107,29 +131,9 @@ namespace DropTableEditor
                 return;
             }
 
-            StatusText.Text = "Valid 3DDATA folder detected. Ready to load drop tables.";
-            StatusText.Foreground = System.Windows.Media.Brushes.Green;
-            LoadButton.IsEnabled = true;
-            SavePath(path);
-        }
-
-        /// <summary>
-        /// Handles the Load button click.
-        /// </summary>
-        private void Load_Click(object sender, RoutedEventArgs e)
-        {
-            string dataPath = DataPathTextBox.Text;
-
-            if (string.IsNullOrEmpty(dataPath) || !Directory.Exists(dataPath))
-            {
-                MessageBox.Show("Please select a valid 3DDATA folder.", "Error", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
+            // Files exist, try to load them
             try
             {
-                // Show loading message
                 StatusText.Text = "Loading files...";
                 StatusText.Foreground = System.Windows.Media.Brushes.Blue;
                 LoadButton.IsEnabled = false;
@@ -141,13 +145,40 @@ namespace DropTableEditor
                     System.Windows.Threading.DispatcherPriority.Background,
                     new Action(delegate { }));
 
+                // Clear any previously loaded data
+                FileManager.Reset();
+
                 // Initialize FileManager with the data path
-                FileManager.Initialize(dataPath);
+                FileManager.Initialize(path);
 
-                StatusText.Text = "Files loaded successfully!";
+                StatusText.Text = "Files loaded successfully! Click 'Open Drop Table Editor' to continue.";
                 StatusText.Foreground = System.Windows.Media.Brushes.Green;
+                LoadButton.IsEnabled = true;
+                BrowseButton.IsEnabled = true;
+                this.Cursor = System.Windows.Input.Cursors.Arrow;
+                SavePath(path);
+            }
+            catch (Exception ex)
+            {
+                StatusText.Text = "Error loading files: " + ex.Message;
+                StatusText.Foreground = System.Windows.Media.Brushes.Red;
+                LoadButton.IsEnabled = false;
+                BrowseButton.IsEnabled = true;
+                this.Cursor = System.Windows.Input.Cursors.Arrow;
+                
+                // Log full exception for debugging
+                System.Diagnostics.Debug.WriteLine("ValidatePath Exception: " + ex.ToString());
+            }
+        }
 
-                // Open the Drop Table Viewer
+        /// <summary>
+        /// Handles the Load button click - opens the Drop Table Editor.
+        /// </summary>
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Open the Drop Table Viewer (files are already loaded by ValidatePath)
                 var viewer = new DropTableViewer();
                 viewer.Owner = this;
                 viewer.Show();
@@ -159,21 +190,12 @@ namespace DropTableEditor
                 viewer.Closed += (s, args) =>
                 {
                     this.Show();
-                    LoadButton.IsEnabled = true;
-                    BrowseButton.IsEnabled = true;
-                    this.Cursor = System.Windows.Input.Cursors.Arrow;
                 };
             }
             catch (Exception ex)
             {
-                this.Cursor = System.Windows.Input.Cursors.Arrow;
-                LoadButton.IsEnabled = true;
-                BrowseButton.IsEnabled = true;
-                StatusText.Text = "Error loading files. See message below.";
-                StatusText.Foreground = System.Windows.Media.Brushes.Red;
-                
-                MessageBox.Show(string.Format("Error loading files:\n\n{0}\n\nPlease make sure you selected the correct 3DDATA folder.", 
-                    ex.Message), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format("Error opening Drop Table Editor:\n\n{0}", ex.Message), 
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

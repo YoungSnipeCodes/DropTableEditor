@@ -13,3 +13,4 @@ C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.csproj.GenerateResour
 C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.csproj.CoreCompileInputs.cache
 C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.exe
 C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.pdb
+C:\rose-tool-dev\DropTableEditor\bin\Debug\DropTableEditor.exe.config
