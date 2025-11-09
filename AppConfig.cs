@@ -38,7 +38,8 @@ namespace DropTableEditor
                         int end = content.IndexOf("\"", start);
                         if (start > 0 && end > start)
                         {
-                            config.LastDataPath = content.Substring(start, end - start);
+                            // Unescape the JSON string (convert \\ back to \)
+                            config.LastDataPath = content.Substring(start, end - start).Replace("\\\\", "\\");
                         }
                     }
                 }
@@ -63,9 +64,9 @@ namespace DropTableEditor
         {
             try
             {
-                // Simple JSON format
-                string json = string.Format("{{\n  \"LastDataPath\": \"{0}\"\n}}", 
-                    LastDataPath.Replace("\\", "\\\\"));
+                // Escape backslashes for JSON format
+                string escapedPath = LastDataPath.Replace("\\", "\\\\");
+                string json = string.Format("{{\n  \"LastDataPath\": \"{0}\"\n}}", escapedPath);
                 File.WriteAllText(ConfigFileName, json);
             }
             catch
