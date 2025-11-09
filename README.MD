@@ -55,9 +55,9 @@ DropTableEditor.config           # User settings (auto-created)
 
 ### Configuration File
 
-`DropTableEditor.config` is auto-created on first launch and stores your settings in JSON format:
+`DropTableEditor.config` is auto-created on first launch and stores your settings in Config format:
 
-```json
+```config
 {
   "LastDataPath": "C:\\path\\to\\3Ddata"
 }
@@ -160,4 +160,5 @@ Created as a standalone extraction from A very heavily modified version of AruaM
 ## Support
 
 For issues, questions, or feature requests, please open an issue on the GitHub repository.
+
 
