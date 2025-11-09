@@ -3,6 +3,8 @@
 A standalone WPF application for editing ROSE Online drop tables (ITEM_DROP.STB). This tool provides a user-friendly interface to view, search, and modify monster drop tables.
 AruaMapEditor Was used as a base for some code linking, and this was later removed for publishing as a independant app.
 
+![Drop Table Editor Screenshot](Screenshot.png)
+
 ## Features
 
 - **Browse and Load**: Select your ROSE Online 3DDATA folder to load drop tables
