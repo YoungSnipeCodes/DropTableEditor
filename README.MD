@@ -1,7 +1,7 @@
 # ROSE Online Drop Table Editor
 
 A standalone WPF application for editing ROSE Online drop tables (ITEM_DROP.STB). This tool provides a user-friendly interface to view, search, and modify monster drop tables.
-AruaMapEditor Was used as a base for somo code linking, and this was later removed for publishing as a independant app.
+AruaMapEditor Was used as a base for some code linking, and this was later removed for publishing as a independant app.
 
 ## Features
 
@@ -158,3 +158,4 @@ Created as a standalone extraction from A very heavily modified version of AruaM
 ## Support
 
 For issues, questions, or feature requests, please open an issue on the GitHub repository.
+
