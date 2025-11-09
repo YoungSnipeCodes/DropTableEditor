@@ -12,10 +12,9 @@ Also has a handy search feature.
 
 ## Usage
 
-1. Browse to your ROSE Online 3DDATA folder
-2. Click "Open Drop Table Editor"
-3. Search and edit drop tables as needed
-4. Click Save
+1. Open DropTableEditor.exe
+2. Search and edit drop tables as needed
+3. Save
 
 ## Requirements
 
@@ -28,3 +27,4 @@ msbuild DropTableEditor.sln /p:Configuration=Release /t:Build
 
 ## Thanks
 Thanks to Brett for the AruaMapEditor
+
