@@ -1,0 +1,15 @@
+C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.csproj.AssemblyReference.cache
+C:\rose-tool-dev\DropTableEditor\obj\Debug\Windows\DropTableViewer.baml
+C:\rose-tool-dev\DropTableEditor\obj\Debug\MainWindow.g.cs
+C:\rose-tool-dev\DropTableEditor\obj\Debug\Windows\DropTableViewer.g.cs
+C:\rose-tool-dev\DropTableEditor\obj\Debug\App.g.cs
+C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor_MarkupCompile.cache
+C:\rose-tool-dev\DropTableEditor\bin\Debug\DropTableEditor.exe
+C:\rose-tool-dev\DropTableEditor\bin\Debug\DropTableEditor.pdb
+C:\rose-tool-dev\DropTableEditor\obj\Debug\MainWindow.baml
+C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.g.resources
+C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.Properties.Resources.resources
+C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.csproj.GenerateResource.cache
+C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.csproj.CoreCompileInputs.cache
+C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.exe
+C:\rose-tool-dev\DropTableEditor\obj\Debug\DropTableEditor.pdb

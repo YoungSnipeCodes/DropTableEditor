@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36616.10 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropTableEditor", "DropTableEditor.csproj", "{FCFAEFAB-0641-480E-9F97-930F28E46B74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCFAEFAB-0641-480E-9F97-930F28E46B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCFAEFAB-0641-480E-9F97-930F28E46B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCFAEFAB-0641-480E-9F97-930F28E46B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCFAEFAB-0641-480E-9F97-930F28E46B74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1261E8D-D056-42E9-BBA9-2DEC5B28E4B0}
+	EndGlobalSection
+EndGlobal
