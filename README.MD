@@ -26,5 +26,6 @@ Also has a handy search feature.
 msbuild DropTableEditor.sln /p:Configuration=Release /t:Build
 
 ## Thanks
-Thanks to Brett for the AruaMapEditor
+Thanks to Xadet for the Map Editor
+
 
